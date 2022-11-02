@@ -2,13 +2,13 @@ class Game:
 
     def __init__(self):
         self.__grid = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
-        self.__moves_history = { '1': ['1','2','3'], '2': ['1','2','3'], '3': ['1','2','3']}
+        self.__moves_history = {'1': ['1', '2', '3'], '2': ['1', '2', '3'], '3': ['1', '2', '3']}
         self.__winner = False
 
-    def play(self, player):
-        move = self.input_validation(player.make_move())
-        self.__grid[move[0]][move[1]] = player.get_symbol()
-        self.__winner_found(player.get_symbol())
+    def play(self, move, symbol):
+        move = self.input_validation(move)
+        self.__grid[move[0]][move[1]] = symbol
+        self.__winner_found(symbol)
 
     # Will validate input is not out of range, and input type
     def input_validation(self, move):
@@ -57,11 +57,6 @@ class Game:
             row += 1
         if row == 3 or row ==3 and column == 3:
             self.__winner = True
-        
-            
-            
-        
-            
     
     def __horizontal_check(self, symbol):
         for row in range(len(self.__grid)):
@@ -76,3 +71,25 @@ class Game:
 
     def get_grid(self):
         return self.__grid
+
+    def display_grid(self):
+        print(f"\n  {self.__grid[0][0]} | {self.__grid[0][1]} | {self.__grid[0][2]} \n "
+              f"---+---+---\n"
+              f"  {self.__grid[1][0]} | {self.__grid[1][1]} | {self.__grid[1][2]} \n"
+              f" ---+---+---\n"
+              f"  {self.__grid[2][0]} | {self.__grid[2][1]} | {self.__grid[2][2]}  ")
+
+    def clear_grid(self):
+        for row in self.__grid:
+            for i in range(row):
+                row[i] = " "
+
+    def build_moves_history(self):
+        for i in range(1, 4):
+            self.__moves_history[i] = ["1", "2", "3"]
+
+    def get_grid(self):
+        return self.__grid
+
+    def get_moves_history(self):
+        return self.__moves_history
