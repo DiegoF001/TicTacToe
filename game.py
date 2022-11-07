@@ -10,13 +10,12 @@ class Game:
         self.__winner_ai = None
         self.__scores = {"X": -1, "O": 1, "tie": 0}
         self.moves_left = 9
-        self.moves_left_ai = 9
 
     def play(self, move, symbol):
         move = self.input_validation(move)
         self.__grid[move[0]][move[1]] = symbol
         self.moves_left -= 1
-        self.__check_winner(symbol)
+        self.__check_grid_for_winner(symbol)
 
     # Will validate input is not out of range, and input type
     def input_validation(self, move):
@@ -31,33 +30,25 @@ class Game:
             return self.input_validation(move)
         return move
 
-    # 1 2, if 2 in dict(1), del
     def __move_validation(self, move):
         if move[1] in self.__moves_history[move[0]]:
             self.__moves_history[move[0]].remove(move[1])
             return True
         return False
 
-    def __check_winner(self, symbol):
-        self.__winner = self.equals(symbol)
-
-    def equals(self, symbol):
+    def __check_grid_for_winner(self, symbol):
         # vertical
         for i in range(3):
             if self.__grid[0][i] == symbol and self.__grid[1][i] == symbol and self.__grid[2][i] == symbol:
-
                 return True
         # horizontal
         for i in range(3):
             if self.__grid[i][0] == symbol and self.__grid[i][1] == symbol and self.__grid[i][2] == symbol:
-
                 return True
         # diagonal
         if self.__grid[0][0] == symbol and self.__grid[1][1] == symbol and self.__grid[2][2] == symbol:
-
             return True
         if self.__grid[0][2] == symbol and self.__grid[1][1] == symbol and self.__grid[2][0] == symbol:
-
             return True
         return None
 
@@ -76,7 +67,6 @@ class Game:
                     score = self.minimax(self.__grid, 0, False, "O")
                     self.__grid[i][j] = " "
                     self.__winner_ai = None
-                    self.moves_left_ai = self.moves_left
                     if score > best_score:
                         best_score = score
                         move[0] = i
@@ -84,10 +74,18 @@ class Game:
         self.__moves_history[move[0]].remove(move[1])
         self.__grid[move[0]][move[1]] = "O"
 
+    def open_spaces(self):
+        n = 0
+        for row in self.__grid:
+            for spot in row:
+                if spot == " ":
+                    n += 1
+        return n
+
     def __check_winner_ai(self, symbol):
-        self.__winner_ai = self.equals(symbol)
+        self.__winner_ai = self.__check_grid_for_winner(symbol)
         # tie
-        if self.__winner_ai is None and self.moves_left_ai == 0:
+        if self.__winner_ai is None and self.open_spaces() == 0:
             return "tie"
         # X won, or O won
         elif self.__winner_ai:
@@ -96,7 +94,6 @@ class Game:
         return None
 
     def minimax(self, grid, depth, is_maximizing, symbol):
-        self.moves_left_ai -= 1
         result = self.__check_winner_ai(symbol)
         if result is not None:
             score = self.__scores[result]
@@ -110,7 +107,7 @@ class Game:
                         grid[i][j] = "O"
                         score = self.minimax(grid, depth + 1, False, "O")
                         grid[i][j] = " "
-                        self.moves_left_ai = self.moves_left
+                        self.__winner_ai = None
                         best_score = max(score, best_score)
             return best_score
         else:
@@ -122,11 +119,11 @@ class Game:
                         score = self.minimax(grid, depth + 1, True, "X")
                         grid[i][j] = " "
                         self.moves_left_ai = self.moves_left
+                        self.__winner_ai = None
                         best_score = min(score, best_score)
             return best_score
 
     def make_move_ai(self):
-        self.moves_left_ai = self.moves_left
         self.best_move()
         self.moves_left -= 1
-        self.__check_winner("O")
+        self.__winner = self.__check_grid_for_winner("O")

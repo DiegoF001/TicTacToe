@@ -15,9 +15,8 @@ class Grid:
             for i in range(len(row)):
                 row[i] = " "
 
-
     def build_moves_history(self):
-        for i in range(1, 4):
+        for i in range(3):
             self.__moves_history[i] = [0, 1, 2]
 
     def get_grid(self):
