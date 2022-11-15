@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@0;1&display=swap');
+
+body {
+  display: flex;
+  background-color: #2f4f4f;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  flex-direction: column;
+  min-height: 98vh;
+}
+
+h1 {
+  padding: 7px;
+  border-radius: 5px;
+}
+
+a {
+  color: white;
+  font-weight: normal;
+}
+
+.menu {
+  display: flex;
+  background-color: #63887E;
+}
+
+.menu>button {
+  width: 20vh;
+  height: 9vh;
+  min-width: 70px;
+  max-height: 10vh;
+  min-height: 40px;
+  background-color: transparent;
+  border: transparent;
+  transition-duration: 0.3s;
+  font-size: large;
+  color: white;
+
+}
+
+.menu>button:hover {
+  background-color: #d8e8e8;
+  color: black;
+
+}
+
+.login {
+  box-shadow: 12px 12px 2px 1px black;
+  background: linear-gradient(120deg, #2F4F4F, #C3CCCC);
+  max-width: 400px;
+  padding: 15px 35px 45px;
+  margin: 100px auto;
+  display: flex;
+  flex-flow: column;
+  border: 5px solid white;
+  border-radius: 40px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: 10px;
+
+}
+
+input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.log-button {
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 15px;
+  font-size: 17px;
+  transition-duration: 0.3s;
+}
+
+.log-button:hover {
+  background-color: #d8e8e8;
+
+}

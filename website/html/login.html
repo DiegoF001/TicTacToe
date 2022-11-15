@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="post" action="/users/login" 
+enctype="application/x-www-form-urlencoded" class="login">
+<h1 class=>Sign In</h1>
+<input name="username" type="text"required placeholder="username" class="form-control">
+<input name="password" type="password"required placeholder="password" class="form-control">
+<a href=""> Not registered yet?</a>
+<button type="submit" class="log-button">login</button>
+</form>
+
+
+{% endblock %}

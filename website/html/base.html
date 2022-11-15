@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <div class="menu">
+      <button onclick="location.href='/'">Log In</button>
+      <button onclick="location.href='/play'">Play</button>
+      <button onclick="location.href='/scores'">Scores</button>
+      <button>Restart</button>
+    </div>
+    {% block content %} {% endblock %}
+  </body>
+</html>
