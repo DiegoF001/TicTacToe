@@ -13,6 +13,23 @@
       <button onclick="location.href='/scores'">Scores</button>
       <button>Restart</button>
     </div>
-    {% block content %} {% endblock %}
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages%} {% if category == 'error'
+    %}
+    <div class="alert" role="alert">
+      {{ message }}
+      <button type="button" data-dismiss="alert">
+        <span area-hidden="'true">&times;</span>
+      </button>
+    </div>
+    {% else %}
+    <div class="success" role="alert">
+      {{ message }}
+      <button type="button" data-dismiss="alert">
+        <span area-hidden="'true">&times;</span>
+      </button>
+    </div>
+    {%endif%} {% endfor %} {% endif%} {% endwith %} {% block content %} {%
+    endblock %}
   </body>
 </html>

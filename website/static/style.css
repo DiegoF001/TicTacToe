@@ -87,5 +87,14 @@ input[type="password"] {
 
 .log-button:hover {
   background-color: #d8e8e8;
+}
 
+.alert {
+  color: red;
+  background-color: pink;
+}
+
+.success {
+  color: green;
+  background-color: greenyellow;
 }
